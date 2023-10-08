@@ -1,18 +1,37 @@
-//import logo from './logo.svg';
 import './App.css';
+import React,{ useState } from 'react';
 import Navbar from './components/Navbar';
-import Textform from './components/Textform';
-// import AboutUs from './components/AboutUs';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import Textbox from './components/Textbox';
+import Alert from './components/Alert';
 //babel compiles the js code
 function App() {
+  const[mode,setMode]=useState('light');
+  const[alert,setAlert]=useState(null);
+  const showAlert=(message)=>{
+    setAlert(message);
+    setTimeout(()=>{
+      setAlert(null)
+    },3000);
+  }
+  const toggleMode=()=>{
+    if(mode==='light'){
+      setMode('dark');
+      showAlert("DarkMode Enabled");
+      document.body.style.backgroundColor='#708090';
+    }
+    else{
+      setMode('light');
+      showAlert("LightMode Enabled");
+      document.body.style.backgroundColor='white';
+    }
+  }
+
   return (
-    //shld return only one element here returning div
-    //node module waala folder kisiko dete nhi
     <>
-    <Navbar title="TextEx" search="Explore"/>
+    <Navbar title="TextEx" search="Explore" mode={mode} toggleMode={toggleMode}/>
+    <Alert alert={alert}></Alert>
     <div className="container">
-      <Textform heading="TextUtils"></Textform>
+      <Textbox heading="TextUtils"/>
       {/* <AboutUs/> */}
     </div>
     </>
