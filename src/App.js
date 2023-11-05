@@ -3,6 +3,8 @@ import React,{ useState } from 'react';
 import Navbar from './components/Navbar';
 import Textbox from './components/Textbox';
 import Alert from './components/Alert';
+import AboutUs from './components/AboutUs';
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 //babel compiles the js code
 function App() {
   const[mode,setMode]=useState('light');
@@ -28,12 +30,18 @@ function App() {
 
   return (
     <>
+    <Router>
     <Navbar title="TextEx" search="Explore" mode={mode} toggleMode={toggleMode}/>
     <Alert alert={alert}></Alert>
-    <div className="container">
-      <Textbox heading="TextUtils"/>
-      {/* <AboutUs/> */}
+    <div class='container'>
+	  <Routes>
+		<Route exact path='/Home' element={<Textbox heading="TextUtils"/>}/> 	
+	  </Routes>
+    <Routes>
+		<Route exact path='/About' element={<AboutUs/>}/> 	
+	  </Routes>
     </div>
+    </Router>
     </>
   );
 }
